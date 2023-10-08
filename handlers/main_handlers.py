@@ -12,3 +12,6 @@ main_router = Router(name=__name__)
 async def message_start_handler(message: Message):
     await message.answer('Main menu:\nChoose the option.', reply_markup=get_keyboard_games_car())
 
+
+
+
