@@ -1,22 +1,18 @@
 import asyncio
-import random
 import json
+import random
 
+from aiogram import Router, F
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
-from aiogram import Router, F
-from aiogram.filters import CommandStart, Command, CommandObject
 from aiogram.types import Message, CallbackQuery
 
 from callbacks.alias import StartCallback, YesNoCallback
-from keyboards.games_keyboard import get_keyboard_games
+from database import register_alias_game, \
+    get_alias_words, remove_alias_word
 from keyboards.play_alias import get_inline_keyboard_game_alias
 from keyboards.start_alias_keyboard import get_inline_keyboard_start_alias
 from texts.buttons import text_play_alias
-from database import register_guess_new_game, register_user_new_game, drop_game, check_available_game, get_game_users, \
-    get_guess_full_word, give_user_score, get_guessed_part_word, set_guessed_part_word, register_alias_game, \
-    get_alias_words, remove_alias_word
-from constants import seconds_helper, seconds_to_start
 
 alias_router = Router(name=__name__)
 
@@ -153,7 +149,6 @@ async def start_callback_foo(query: CallbackQuery, callback_data: StartCallback,
     await query.message.edit_text(generate_alias_time_text(11))
 
     chat_id = query.message.chat.id
-
 
     msg = await query.message.answer(f'You started the game. \nWord: {generate_random_word(chat_id)}',
                                      reply_markup=get_inline_keyboard_game_alias())

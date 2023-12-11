@@ -1,5 +1,3 @@
-from copy import copy
-
 from sqlalchemy import create_engine, ForeignKey
 from sqlalchemy.orm import Session, DeclarativeBase, relationship
 from sqlalchemy import Column, String, BigInteger, Integer

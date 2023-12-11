@@ -1,14 +1,9 @@
 import asyncio
 import logging
 import sys
-from os import getenv
 
-from aiogram import Bot, Dispatcher, Router, types, F
+from aiogram import Bot, Dispatcher
 from aiogram.enums import ParseMode
-from aiogram.filters import CommandStart, Command, ChatMemberUpdatedFilter, IS_MEMBER
-from aiogram.types import Message
-from aiogram.utils.markdown import hbold
-from aiogram.types.chat_member_updated import ChatMemberUpdated
 
 from handlers.codenames_handler import codenames_router
 from handlers.main_handlers import main_router
