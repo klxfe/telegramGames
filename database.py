@@ -435,3 +435,5 @@ def register_alias_game(chat_id, words: list):
         alias_game = Alias(chat_id=chat_id, words=words)
         session.add(alias_game)
         session.commit()
+
+
