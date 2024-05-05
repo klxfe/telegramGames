@@ -222,7 +222,7 @@ async def start_callback_foo(query: CallbackQuery, state: FSMContext):
 
     msg = await query.message.answer(f'You started the game. \nWord: {generate_random_word(chat_id)}',
                                      reply_markup=get_inline_keyboard_game_alias())
-    await start_timer(state, query.message, 10, msg)
+    await start_timer(state, query.message, 50, msg)
 
 
 @alias_router.callback_query(StartCallback.filter(F.foo == 'end'))
