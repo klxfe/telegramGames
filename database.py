@@ -1,6 +1,10 @@
+from copy import copy
+
 from sqlalchemy import create_engine, ForeignKey
 from sqlalchemy.orm import Session, DeclarativeBase, relationship
-from sqlalchemy import Column, String, BigInteger, Integer
+from sqlalchemy import Column, String, Date, BigInteger, Integer
+
+from constants import diplomacy_max_players
 
 sqlite_database = "sqlite:///database.db"
 
@@ -152,9 +156,6 @@ def leave_user_from_all_chats(telegram_id):
         session.commit()
 
 
-'''lower functions connected with codenames game'''
-
-
 def register_new_codenames_game(words_all, words_red, words_blue, word_black, chat_id):
     with Session(autoflush=False, bind=engine) as session:
         session.query(CodeNames).filter_by(chat_id=chat_id).delete()
@@ -228,11 +229,9 @@ def info_codenames(chat_id):
         red_cap = codenames_game.id_capitan_red
         blue_cap = codenames_game.id_capitan_blue
     return (f'Red cap: {red_cap}'
-            f'\nRed team members:'
-            f'\n{len(red_ids.split())}'
+            f'\n{red_ids}'
             f'\nBlue cap:{blue_cap}'
-            f'\nBlue team members:'
-            f'\n{len(blue_ids.split())}')
+            f'\n{blue_ids}')
 
 
 def leave_codenames(chat_id, user_id):
@@ -305,7 +304,6 @@ def drop_codenames_game(chat_id):
         session.query(CodeNames).filter_by(chat_id=chat_id).delete()
         session.commit()
         return True
-
 
 
 def get_codenames_all_words(chat_id) -> list:

@@ -1,9 +1,16 @@
-from aiogram.utils.keyboard import InlineKeyboardBuilder
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardButton
+from aiogram.utils.keyboard import InlineKeyboardBuilder, ReplyKeyboardBuilder
 
 from callbacks.alias import StartCallback
 
 
 def get_inline_keyboard_start_alias():
+    """
+    Generuje klávesnici pro hru Alias.
+
+    Returns:
+        InlineKeyboardMarkup: Klávesnice pro začátek a konec hry.
+    """
     builder = InlineKeyboardBuilder()
 
     builder.button(text='Start', callback_data=StartCallback(foo='start'))

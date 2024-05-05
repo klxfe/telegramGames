@@ -1,6 +1,7 @@
 import asyncio
 import logging
 import sys
+from os import getenv
 
 from aiogram import Bot, Dispatcher
 from aiogram.enums import ParseMode
@@ -16,6 +17,9 @@ with open('bot_token.txt') as file:
 
 
 async def main() -> None:
+    """
+     Hlavní funkce pro spouštění bota
+    """
     dp = Dispatcher()
     bot = Bot(TOKEN, parse_mode=ParseMode.HTML)
     dp.include_routers(
