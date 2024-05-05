@@ -1,4 +1,3 @@
-import asyncio
 import json
 import random
 from prettytable import PrettyTable
