@@ -5,22 +5,17 @@ import random
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
 from aiogram import Router, F
-from aiogram.filters import CommandStart, Command, CommandObject
 from aiogram.types import Message, CallbackQuery
 
 from callbacks.alias import StartCallback, YesNoCallback
-from keyboards.games_keyboard import get_keyboard_games
 from keyboards.play_alias import get_inline_keyboard_game_alias
 from keyboards.start_alias_keyboard import get_inline_keyboard_start_alias
 from texts.buttons import text_play_alias
-from database import register_guess_new_game, register_user_new_game, drop_game, check_available_game, get_game_users, \
-    get_guess_full_word, give_user_score, get_guessed_part_word, set_guessed_part_word, register_alias_game, \
-    get_alias_words, remove_alias_word
-from constants import seconds_helper, seconds_to_start
+from database import  register_alias_game, get_alias_words, remove_alias_word
 
 alias_router = Router(name=__name__)
 
-WIN_SCORE = 5
+WIN_SCORE = 50
 
 
 class GameState(StatesGroup):
@@ -127,14 +122,14 @@ async def start_timer(state: FSMContext, message: Message, seconds, msg: Message
         if state_info != 'first_team_score' and state_info != 'second_team_score':
             return
 
-        if seconds <= 5:
+        if seconds <= 10:
             await asyncio.sleep(1)
             seconds -= 1
             await message.edit_text(generate_alias_time_text(seconds))
             continue
         await message.edit_text(generate_alias_time_text(seconds))
-        await asyncio.sleep(5)
-        seconds -= 5
+        await asyncio.sleep(10)
+        seconds -= 10
     counter_data = await state.get_data()
     await state.update_data(words_counter=int(counter_data['words_counter']) + 1)
     data = await state.get_data()

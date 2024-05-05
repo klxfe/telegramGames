@@ -1,5 +1,3 @@
-seconds_helper = 5
-seconds_to_start = 5
+seconds_helper = 20
+seconds_to_start = 10
 
-diplomacy_max_players = 3
-diplomacy_min_players = 1

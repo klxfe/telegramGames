@@ -3,11 +3,9 @@ import json
 import random
 from prettytable import PrettyTable
 
-from aiogram.fsm.context import FSMContext
-from aiogram.fsm.state import StatesGroup, State
 from aiogram import Router, F, Bot
-from aiogram.filters import CommandStart, Command, CommandObject
-from aiogram.types import Message, CallbackQuery
+from aiogram.filters import Command, CommandObject
+from aiogram.types import Message
 
 from database import register_new_codenames_game, join_blue_codenames, join_red_codenames, info_codenames, \
     leave_codenames, join_red_capitan, join_blue_capitan, start_codenames_game, get_codenames_all_words, \

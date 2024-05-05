@@ -1,4 +1,4 @@
-from aiogram.utils.keyboard import InlineKeyboardBuilder, ReplyKeyboardBuilder
+from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 from callbacks.alias import YesNoCallback
 

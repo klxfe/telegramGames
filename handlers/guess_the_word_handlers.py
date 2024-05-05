@@ -1,12 +1,9 @@
 import asyncio
 import json
 import random
-from aiogram.fsm.state import StatesGroup, State
 from aiogram import Router, F
-from aiogram.filters import CommandStart, Command, CommandObject
+from aiogram.filters import Command, CommandObject
 from aiogram.types import Message
-
-from keyboards.games_keyboard import get_keyboard_games
 from texts.buttons import text_play_guess_the_word
 from database import register_guess_new_game, register_user_new_game, drop_game, check_available_game, get_game_users, \
     get_guess_full_word, give_user_score, get_guessed_part_word, set_guessed_part_word, leave_user_from_all_chats
@@ -95,14 +92,14 @@ async def connection_time(message: Message, question, hidden_word, word):
     seconds = seconds_to_start
     await my_queue.put(1)
     while seconds > 0:
-        if seconds <= 5:
+        if seconds <= 10:
             await asyncio.sleep(1)
             seconds -= 1
             await message.edit_text(generate_connection_text(seconds))
             continue
         await message.edit_text(generate_connection_text(seconds))
-        await asyncio.sleep(5)
-        seconds -= 5
+        await asyncio.sleep(10)
+        seconds -= 10
     await message.edit_text('Time is over. Game has started.')
     await message.answer(f'Q:{question}\n{hidden_word}')
     await reveal_loop(message, word)
